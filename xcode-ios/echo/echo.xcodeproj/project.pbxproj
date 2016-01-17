@@ -290,6 +290,11 @@
 					"$(ARCHS_STANDARD)",
 					armv7s,
 				);
+				OTHER_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wcast-align",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -303,6 +308,11 @@
 				ARCHS = (
 					"$(ARCHS_STANDARD)",
 					armv7s,
+				);
+				OTHER_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wcast-align",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
