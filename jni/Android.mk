@@ -13,7 +13,7 @@ LOCAL_MODULE:= libecho
 LOCAL_C_INCLUDES += \
     $(LOCAL_PATH)/
 
-LOCAL_CFLAGS += -std=c99
+LOCAL_CFLAGS += -std=c99 -Wall -Wextra -Wcast-align
 
 include $(BUILD_SHARED_LIBRARY)
 

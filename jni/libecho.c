@@ -108,6 +108,8 @@ int  Echo_process(EchoContext *pContext,
 	uint32_t bufferProcessed = 0;
 	uint32_t currSize;
 	uint32_t echoBufOffset = pContext->echoBufferPtr;
+	void *tmpInBufPtr;
+	void *tmpEchoBufPtr;
 #ifdef DEBUG_WITH_FILE_IO
 
 	FILE *fi;
@@ -139,8 +141,9 @@ int  Echo_process(EchoContext *pContext,
 		fclose(fi);
 
 #endif
-
-		apply_s16le((int16_t *) pContext->inBuffer, (int16_t *) pContext->echoBuffer, echoBufOffset / 2, currSize / 2, pContext->attenuationFactor);
+		tmpInBufPtr   = pContext->inBuffer;
+		tmpEchoBufPtr = pContext->echoBuffer;
+		apply_s16le((int16_t *) tmpInBufPtr, (int16_t *) tmpEchoBufPtr, echoBufOffset / 2, currSize / 2, pContext->attenuationFactor);
 
 #ifdef DEBUG_WITH_FILE_IO
 
