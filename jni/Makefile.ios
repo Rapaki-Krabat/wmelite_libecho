@@ -4,8 +4,11 @@
 TARGET = echo
 INCLUDE=-I.
 SRCS=libecho.c
+
 INSTALLDIR_HEADERS=libecho/include/
 INSTALLDIR_LIBRARY=libecho/libcombined/
+INSTALLDIR=`$(PLATFORM_CONFIG) --installdir`
+INSTALL_HEADERS=libecho.h
 
 ifeq ($(CUSTOM_PLATFORM_CONFIG),)
 PLATFORM_CONFIG=../../ios_platform_config.sh
@@ -72,8 +75,6 @@ MODULES_i386 = $(SRCS_TO_COMPILE:.c=.o-i386)
 MODULES_i386 := $(MODULES_i386:.cpp=.o-i386)
 MODULES_x86_64 = $(SRCS_TO_COMPILE:.c=.o-x86_64)
 MODULES_x86_64 := $(MODULES_x86_64:.cpp=.o-x86_64)
-
-INSTALLDIR=`$(PLATFORM_CONFIG) --installdir`
 
 default: all
 
@@ -149,7 +150,7 @@ combine_libs:
 install: combine_libs
 	mkdir -p $(INSTALLDIR)/$(INSTALLDIR_HEADERS)
 	mkdir -p $(INSTALLDIR)/$(INSTALLDIR_LIBRARY)
-	cp libecho.h $(INSTALLDIR)/$(INSTALLDIR_HEADERS)
+	cp $(INSTALL_HEADERS) $(INSTALLDIR)/$(INSTALLDIR_HEADERS)
 	cp $(STATICLIB) $(INSTALLDIR)/$(INSTALLDIR_LIBRARY)
 	
 clean:
