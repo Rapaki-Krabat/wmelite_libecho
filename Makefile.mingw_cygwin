@@ -1,0 +1,42 @@
+
+CC=i686-pc-mingw32-gcc
+CPP=i686-pc-mingw32-g++
+RM=rm
+
+OUTDIR=mingwout/
+
+
+OBJS=\
+    $(OUTDIR)/libecho.o
+
+TESTOBJS=\
+    $(OUTDIR)/libechotest.o
+
+INCS=\
+    -Ijni/
+
+ARCHFLAGS=
+CFLAGS=-fPIC -g -std=c99 $(ARCHFLAGS) -Wall -DLIBECHO_NO_EXPORT_DLL_SYMBOLS
+# LIBFLAGS=-shared -Wl,-soname,libreverbwrapper.so
+LIBFLAGS=-fPIC -shared
+
+$(OUTDIR)/%.o: jni/%.c
+	$(CC) $(INCS) -c -o $@ $< $(CFLAGS)
+
+all: mkdirs libs
+
+mkdirs:
+	mkdir -p $(OUTDIR)
+
+libs: $(OBJS)
+	$(CC) $(LIBFLAGS) $(ARCHFLAGS) -o $(OUTDIR)/echo.dll $(OBJS)
+	i686-pc-mingw32-ar rcs $(OUTDIR)/libecho.a $(OBJS)
+
+echotest: $(TESTOBJS) $(TESTOBJS2)
+	$(CC) -fPIC -o $(OUTDIR)/echotest $(ARCHFLAGS) -L$(OUTDIR) $(TESTOBJS) -lecho -lm
+
+clean:
+	$(RM) -f $(OBJS) $(TESTOBJS) $(OUTDIR)/libecho* $(OUTDIR)/echo*
+
+.PHONY: clean all
+
