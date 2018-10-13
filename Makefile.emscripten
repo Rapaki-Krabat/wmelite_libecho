@@ -16,7 +16,7 @@ INCS=\
      -Iinclude/
 
 ARCHFLAGS=
-CFLAGS=-fPIC -g -std=c99 $(ARCHFLAGS) -Wall
+CFLAGS=-fPIC -O2 -g -std=c99 $(ARCHFLAGS) -Wall
 # LIBFLAGS=-shared -Wl,-soname,libreverbwrapper.so
 LIBFLAGS=-fPIC -shared -Wl,-export-dynamic -lc
 
