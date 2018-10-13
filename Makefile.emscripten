@@ -1,0 +1,42 @@
+
+CC=emcc
+CPP=em++
+RM=rm
+
+OUTDIR=out/
+
+
+OBJS=\
+    $(OUTDIR)/libecho.o
+
+TESTOBJS=\
+    $(OUTDIR)/libechotest.o
+
+INCS=\
+     -Iinclude/
+
+ARCHFLAGS=
+CFLAGS=-fPIC -g -std=c99 $(ARCHFLAGS) -Wall
+# LIBFLAGS=-shared -Wl,-soname,libreverbwrapper.so
+LIBFLAGS=-fPIC -shared -Wl,-export-dynamic -lc
+
+$(OUTDIR)/%.o: src/%.c
+	$(CC) $(INCS) -c -o $@ $< $(CFLAGS)
+
+all: mkdirs libs
+
+mkdirs:
+	mkdir -p out/
+
+libs: $(OBJS)
+	$(CC) $(LIBFLAGS) $(ARCHFLAGS) -o $(OUTDIR)/libecho.bc $(OBJS)
+	# ar rcs $(OUTDIR)/libecho.a $(OBJS)
+
+echotest: $(TESTOBJS) $(TESTOBJS2)
+	$(CC) -fPIC -o $(OUTDIR)/echotest $(ARCHFLAGS) -L$(OUTDIR) $(TESTOBJS) -lecho -lm
+
+clean:
+	$(RM) -f $(OBJS) $(TESTOBJS) $(OUTDIR)/libecho* $(OUTDIR)/echo*
+
+.PHONY: clean all
+
