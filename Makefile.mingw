@@ -1,6 +1,6 @@
 
-CC=i586-mingw32msvc-gcc
-CPP=i586-mingw32msvc-g++
+CC=i686-w64-mingw32-gcc
+CPP=i686-w64-mingw32-g++
 RM=rm
 
 OUTDIR=mingwout/
