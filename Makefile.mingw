@@ -1,6 +1,7 @@
 
 CC=i686-w64-mingw32-gcc
 CPP=i686-w64-mingw32-g++
+AR=i686-w64-mingw32-ar
 RM=rm
 
 OUTDIR=mingwout/
@@ -30,7 +31,7 @@ mkdirs:
 
 libs: $(OBJS)
 	$(CC) $(LIBFLAGS) $(ARCHFLAGS) -o $(OUTDIR)/echo.dll $(OBJS)
-	i586-mingw32msvc-ar rcs $(OUTDIR)/libecho.a $(OBJS)
+	$(AR) rcs $(OUTDIR)/libecho.a $(OBJS)
 
 echotest: $(TESTOBJS) $(TESTOBJS2)
 	$(CC) -fPIC -o $(OUTDIR)/echotest $(ARCHFLAGS) -L$(OUTDIR) $(TESTOBJS) -lecho -lm
