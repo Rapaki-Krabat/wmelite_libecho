@@ -30,7 +30,7 @@ THE SOFTWARE.
 // #define DEBUG_WITH_FILE_IO
 // #define DEBUG_WITH_PRINTF
 
-EXPORT_FUNCTION int  Echo_init(EchoContext *pContext,
+int  Echo_init(EchoContext *pContext,
 			   uint8_t channels, 
 			   uint8_t bytes_per_channel, 
 			   uint16_t sampling_rate_hz,
@@ -71,7 +71,7 @@ EXPORT_FUNCTION int  Echo_init(EchoContext *pContext,
 	return 0;
 }
 
-EXPORT_FUNCTION void Echo_free(EchoContext *pContext)
+void Echo_free(EchoContext *pContext)
 {
 	free((void *) pContext->inBuffer);
 	free((void *) pContext->echoBuffer);
@@ -101,7 +101,7 @@ static void apply_s16le(int16_t *buffer, int16_t *echoBuffer, uint32_t offset, u
 	}
 }
 
-EXPORT_FUNCTION int  Echo_process(EchoContext *pContext,
+int  Echo_process(EchoContext *pContext,
 				  uint8_t     *buffer,
 				  uint32_t     len)
 {

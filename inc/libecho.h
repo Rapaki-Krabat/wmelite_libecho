@@ -25,42 +25,10 @@ THE SOFTWARE.
 #ifndef LIBECHO_H_INCLUDED
 #define LIBECHO_H_INCLUDED
 
-#ifdef _WIN32
-
-#ifndef LIBECHO_NO_EXPORT_DLL_SYMBOLS
-
-#ifdef LIBECHO_EXPORTS
-#define EXPORT_FUNCTION __declspec(dllexport)
-#else
-#define EXPORT_FUNCTION __declspec(dllimport)
-#endif
-
-#else
-#define EXPORT_FUNCTION
-#endif // LIBECHO_NO_EXPORT_DLL_SYMBOLS
-
-#else
-#define EXPORT_FUNCTION
-#endif //_WIN32
-
-#if __cplusplus
-extern "C" {
-#endif
-
-#ifdef _WIN32
-
-typedef signed char int8_t;
-typedef short       int16_t;
-typedef int         int32_t;
-
-typedef unsigned char  uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int   uint32_t;
-
-#else
-
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 typedef struct EchoContext_t
@@ -73,18 +41,20 @@ typedef struct EchoContext_t
 	uint32_t echoBufferPtr;
 } EchoContext;
 
-EXPORT_FUNCTION int  Echo_init(EchoContext *pContext, 
-							   uint8_t channels, 
-							   uint8_t bytes_per_channel, 
-							   uint16_t sampling_rate_hz,
-							   float    attenuationFactor,
-							   uint16_t echo_period_ms);
-EXPORT_FUNCTION void Echo_free(EchoContext *pContext);
-EXPORT_FUNCTION int  Echo_process(EchoContext *pContext,
-				                  uint8_t     *buffer,
-				                  uint32_t     len);
+int  Echo_init(EchoContext *pContext, 
+			   uint8_t channels, 
+			   uint8_t bytes_per_channel, 
+			   uint16_t sampling_rate_hz,
+			   float    attenuationFactor,
+			   uint16_t echo_period_ms);
 
-#if __cplusplus
+void Echo_free(EchoContext *pContext);
+
+int  Echo_process(EchoContext *pContext,
+				  uint8_t     *buffer,
+				  uint32_t     len);
+
+#ifdef __cplusplus
 }  // extern "C"
 #endif
 
