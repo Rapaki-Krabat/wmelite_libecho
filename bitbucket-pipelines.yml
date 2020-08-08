@@ -1,4 +1,4 @@
-image: gcc:6.1
+image: hcdaniel/debian10build:latest
 pipelines:
   default:
     - step:
