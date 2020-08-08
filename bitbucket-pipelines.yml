@@ -6,7 +6,6 @@ pipelines:
         script:
           - mkdir -p build/gcc
           - cd build/gcc
-          - rm -rf *
           - cmake -DCMAKE_TOOLCHAIN_FILE=/toolchain-gcc.cmake ../../
           - make
     - step:
