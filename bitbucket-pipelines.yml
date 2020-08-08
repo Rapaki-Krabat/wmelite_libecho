@@ -1,0 +1,11 @@
+image: gcc:6.1
+pipelines:
+  default:
+    - step:
+        script:
+          - mkdir -p build
+          - cd build
+          - rm -rf *
+          - cmake ../
+          - make
+
