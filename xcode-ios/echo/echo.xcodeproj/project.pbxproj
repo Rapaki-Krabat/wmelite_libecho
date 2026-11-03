@@ -113,6 +113,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 6588C31D1B483236003A3627;
@@ -239,6 +240,7 @@
 		6588C33B1B483237003A3627 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = (
 					"-Wall",
 					"-Wextra",
@@ -254,6 +256,7 @@
 		6588C33C1B483237003A3627 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = (
 					"-Wall",
 					"-Wextra",
